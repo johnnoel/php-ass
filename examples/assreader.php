@@ -5,10 +5,10 @@
  * @package ASSREADER
  */
 
-require('Ass/Ass.php');
-require('Ass/Block.php');
-require('Ass/MappedData.php');
-require('Ass/Entries.php');
+require(__DIR__.'/../Ass.php');
+require(__DIR__.'/../Block.php');
+require(__DIR__.'/../MappedData.php');
+require(__DIR__.'/../Entries.php');
 
 if ($argc != 2) {
     echo 'Usage: php '.basename(__FILE__). ' {filename}'.PHP_EOL;
