@@ -18,7 +18,7 @@ class MappedData
         foreach ($formatMap as $k => $internalName) {
             // special case for text which subsumes the remaining data parts
             if ($internalName == 'Text') {
-                $this->$internalName = implode('', array_slice($data, $k));
+                $this->$internalName = implode(', ', array_slice($data, $k));
             } else {
                 $this->$internalName = $data[$k];
             }
