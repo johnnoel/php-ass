@@ -15,7 +15,7 @@
     "autoload": {
         "psr-0": { "chaostangent\\Ass": "" }
     },
-    "target-dir": "chaostangent/php-ass",
+    "target-dir": "chaostangent/Ass",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
