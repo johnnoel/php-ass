@@ -12,6 +12,10 @@
     "require": {
         "php": ">=5.3.3"
     },
+    "autoload": {
+        "psr-0": { "chaostangent\\php-ass": "" }
+    },
+    "target-dir": "chaostangent/php-ass",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
