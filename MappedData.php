@@ -16,7 +16,12 @@ class MappedData
         $this->blockName = $name;
 
         foreach ($formatMap as $k => $internalName) {
-            $this->$internalName = $data[$k];
+            // special case for text which subsumes the remaining data parts
+            if ($internalName == 'Text') {
+                $this->$internalName = implode('', array_slice($data, $k));
+            } else {
+                $this->$internalName = $data[$k];
+            }
         }
     }
 

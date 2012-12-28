@@ -18,16 +18,19 @@ if ($argc != 2) {
 $filename = $argv[1];
 
 $assFile = chaostangent\Ass\Ass::fromFile($filename);
-$blocks = $assFile->findBlocks('V4+ Styles');
+$blocks = $assFile->getBlocks();
 
 foreach ($blocks as $idx => $block) {
     echo '['.$idx.'] '.$block->getName().PHP_EOL;
     $entries = $block->getEntries();
 
-    $styles = $entries->extract(chaostangent\Ass\Entries::ENTRY_STYLE);
-    $fontNames = $entries->pluck(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname');
-    $fonts = $entries->search(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname', 'Amaranth');
+    // get all the dialogue text entries
+    $dialogue = $entries->pluck(chaostangent\Ass\Entries::ENTRY_DIALOGUE, 'Text');
 
-    //var_dump($styles, $fontNames, $fonts);
-    var_dump($fonts);
+    // get all the styles used in the file
+    $styles = $entries->extract(chaostangent\Ass\Entries::ENTRY_STYLE);
+    // find out all the font names used
+    $fontNames = $entries->pluck(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname');
+    // get style entries where the "Amaranth" font is used
+    $fonts = $entries->search(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname', 'Amaranth');
 }
