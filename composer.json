@@ -1,9 +1,9 @@
 {
-    "name": "chaostangent/ass-php",
+    "name": "chaostangent/php-ass",
     "type": "library",
     "description": "A set of classes for reading information from Advanced Substation Alpha subtitle files",
     "keywords": ["ass","ssa","subtitles","subtitle","mkv","mp4"],
-    "homepage": "http://github.com/johnnoel/ass-php",
+    "homepage": "http://github.com/johnnoel/php-ass",
     "license": "Creative Commons Attribution-ShareAlike 3.0",
     "authors": [{
         "name": "John Noel",
