@@ -13,7 +13,7 @@
         "php": ">=5.3.3"
     },
     "autoload": {
-        "psr-0": { "chaostangent\\php-ass": "" }
+        "psr-0": { "chaostangent\\Ass": "" }
     },
     "target-dir": "chaostangent/php-ass",
     "extra": {
