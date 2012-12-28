@@ -5,7 +5,7 @@
  * @package ASSREADER
  */
 
-namespace Ass;
+namespace chaostangent\Ass;
 
 class Entries implements \ArrayAccess, \IteratorAggregate
 {

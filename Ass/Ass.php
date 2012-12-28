@@ -5,7 +5,7 @@
  * @package ASSREADER
  */
 
-namespace Ass;
+namespace chaostangent\Ass;
 
 class Ass 
 {
@@ -24,7 +24,8 @@ class Ass
         $fh = fopen($filename, 'r');
 
         // check whether there's a UTF8 BOM
-        $utf8bom = reset(unpack('h*', fread($fh, 3)));
+        $a = unpack('h*', fread($fh, 3));
+        $utf8bom = reset($a);
         if (strtolower($utf8bom) != 'febbfb') {
             fseek($fh, 0);
         }

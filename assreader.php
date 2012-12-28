@@ -17,16 +17,17 @@ if ($argc != 2) {
 
 $filename = $argv[1];
 
-$assFile = Ass\Ass::fromFile($filename);
+$assFile = chaostangent\Ass\Ass::fromFile($filename);
 $blocks = $assFile->findBlocks('V4+ Styles');
 
 foreach ($blocks as $idx => $block) {
     echo '['.$idx.'] '.$block->getName().PHP_EOL;
     $entries = $block->getEntries();
 
-    $styles = $entries->extract(Ass\Entries::ENTRY_STYLE);
-    $fontNames = $entries->pluck(Ass\Entries::ENTRY_STYLE, 'Fontname');
-    $fonts = $entries->search(Ass\Entries::ENTRY_STYLE, 'Fontname', 'Amaranth');
+    $styles = $entries->extract(chaostangent\Ass\Entries::ENTRY_STYLE);
+    $fontNames = $entries->pluck(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname');
+    $fonts = $entries->search(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname', 'Amaranth');
 
+    //var_dump($styles, $fontNames, $fonts);
     var_dump($fonts);
 }
