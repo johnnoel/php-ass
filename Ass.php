@@ -17,7 +17,7 @@ class Ass
     public static function fromFile($filename)
     {
         if (!file_exists($filename)) {
-            throw new Exception('Unable to find file');
+            throw new \Exception('Unable to find file');
         }
 
         $ret = new self();
