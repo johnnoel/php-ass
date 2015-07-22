@@ -8,7 +8,7 @@ namespace ChaosTangent\ASS\Line;
  * @author John Noel <john.noel@chaostangent.com>
  * @package php-ass
  */
-class Dialogue extends Line
+class Dialogue extends MappedLine
 {
     const MARKED = 'Marked';
     const LAYER = 'Layer';
@@ -44,21 +44,6 @@ class Dialogue extends Line
     protected $effect;
     /** @var string */
     protected $text;
-
-    /** @var array */
-    protected $mapping = [
-        self::MARKED => 'marked',
-        self::LAYER => 'layer',
-        self::START => 'start',
-        self::END => 'end',
-        self::STYLE => 'style',
-        self::NAME => 'name',
-        self::MARGIN_L => 'marginL',
-        self::MARGIN_R => 'marginR',
-        self::MARGIN_V => 'marginV',
-        self::EFFECT => 'effect',
-        self::TEXT => 'text',
-    ];
 
     /**
      * Set marked
@@ -311,5 +296,25 @@ class Dialogue extends Line
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getMapping()
+    {
+        return [
+            self::MARKED => 'marked',
+            self::LAYER => 'layer',
+            self::START => 'start',
+            self::END => 'end',
+            self::STYLE => 'style',
+            self::NAME => 'name',
+            self::MARGIN_L => 'marginL',
+            self::MARGIN_R => 'marginR',
+            self::MARGIN_V => 'marginV',
+            self::EFFECT => 'effect',
+            self::TEXT => 'text',
+        ];
     }
 }

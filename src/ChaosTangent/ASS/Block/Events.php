@@ -8,6 +8,6 @@ namespace ChaosTangent\ASS\Block;
  * @author John Noel <john.noel@chaostangent.com>
  * @package php-ass
  */
-class Events extends Block
+class Events extends MappedBlock
 {
 }

@@ -8,7 +8,7 @@ namespace ChaosTangent\ASS\Line;
  * @author John Noel <john.noel@chaostangent.com>
  * @package php-ass
  */
-class Style extends Line
+class Style extends MappedLine
 {
     // ASS mapping names
     const NAME = 'Name';
@@ -84,34 +84,6 @@ class Style extends Line
     protected $alphaLevel;
     /** @var string */
     protected $encoding;
-
-    /** @var array */
-    protected $mapping = [
-        self::NAME => 'name',
-        self::FONT_NAME => 'fontname',
-        self::FONT_SIZE => 'fontsize',
-        self::PRIMARY_COLOUR => 'primaryColour',
-        self::SECONDARY_COLOUR => 'secondaryColour',
-        self::OUTLINE_COLOUR => 'outlineColour',
-        self::BACK_COLOUR => 'backColour',
-        self::BOLD => 'bold',
-        self::ITALIC => 'italic',
-        self::UNDERLINE => 'underline',
-        self::STRIKE_OUT => 'strikeOut',
-        self::SCALE_X => 'scaleX',
-        self::SCALE_Y => 'scaleY',
-        self::SPACING => 'spacing',
-        self::ANGLE => 'angle',
-        self::BORDER_STYLE => 'borderStyle',
-        self::OUTLINE => 'outline',
-        self::SHADOW => 'shadow',
-        self::ALIGNMENT => 'alignment',
-        self::MARGIN_L => 'marginL',
-        self::MARGIN_R => 'marginR',
-        self::MARGIN_V => 'marginV',
-        self::ALPHA_LEVEL => 'alphaLevel',
-        self::ENCODING => 'encoding',
-    ];
 
     /**
      * Set name
@@ -663,5 +635,38 @@ class Style extends Line
     public function getEncoding()
     {
         return $this->encoding;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getMapping()
+    {
+        return [
+            self::NAME => 'name',
+            self::FONT_NAME => 'fontname',
+            self::FONT_SIZE => 'fontsize',
+            self::PRIMARY_COLOUR => 'primaryColour',
+            self::SECONDARY_COLOUR => 'secondaryColour',
+            self::OUTLINE_COLOUR => 'outlineColour',
+            self::BACK_COLOUR => 'backColour',
+            self::BOLD => 'bold',
+            self::ITALIC => 'italic',
+            self::UNDERLINE => 'underline',
+            self::STRIKE_OUT => 'strikeOut',
+            self::SCALE_X => 'scaleX',
+            self::SCALE_Y => 'scaleY',
+            self::SPACING => 'spacing',
+            self::ANGLE => 'angle',
+            self::BORDER_STYLE => 'borderStyle',
+            self::OUTLINE => 'outline',
+            self::SHADOW => 'shadow',
+            self::ALIGNMENT => 'alignment',
+            self::MARGIN_L => 'marginL',
+            self::MARGIN_R => 'marginR',
+            self::MARGIN_V => 'marginV',
+            self::ALPHA_LEVEL => 'alphaLevel',
+            self::ENCODING => 'encoding',
+        ];
     }
 }

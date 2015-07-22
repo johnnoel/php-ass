@@ -15,8 +15,31 @@ class Format extends Line
     /** @var array */
     protected $mapping = [];
 
-    protected function doParse($value)
+    /**
+     * Set mapping
+     *
+     * @param array $mapping
+     * @return Format
+     */
+    public function setMapping(array $mapping)
     {
-        $this->mapping = array_flip(array_map('trim', explode(',', $value)));
+        $this->mapping = $mapping;
+
+        return $this;
+    }
+
+    /**
+     * Get mapping
+     *
+     * @return array
+     */
+    public function getMapping()
+    {
+        return $this->mapping;
+    }
+
+    protected function doParse($value, array $mapping)
+    {
+        $this->mapping = array_map('trim', explode(',', $value));
     }
 }

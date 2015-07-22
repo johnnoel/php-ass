@@ -8,12 +8,6 @@ namespace ChaosTangent\ASS\Block;
  * @author John Noel <john.noel@chaostangent.com>
  * @package php-ass
  */
-class Styles extends Block
+class Styles extends MappedBlock
 {
-    /**
-     * {@inheritDoc}
-     */
-    protected function doParse(array $lines)
-    {
-    }
 }

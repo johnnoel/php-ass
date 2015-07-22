@@ -2,6 +2,7 @@
 
 namespace ChaosTangent\ASS;
 
+use ChaosTangent\ASS\Exception\InvalidScriptException;
 use ChaosTangent\ASS\Block\Block;
 
 /**
@@ -41,13 +42,43 @@ class Script implements \IteratorAggregate
     /**
      * Quick check as to whether the content looks like an ASS script
      *
-     * @param string $content
      * @return boolean True if it does, false otherwise
      */
-    public function isASSScript($content)
+    public function isASSScript()
     {
         $string = '[Script Info]';
-        return substr($content, 0, strlen($string)) == $string;
+        return substr($this->content, 0, strlen($string)) == $string;
+    }
+
+    /**
+     * Parse this script
+     */
+    public function parse()
+    {
+        $lines = explode("\n", $this->content); // SSA/ASS files are always DOS
+        if (count($lines) == 1) {
+            throw new InvalidScriptException('Only one line in the script, probably incorrect line endings.');
+        }
+
+        $lineBuffer = [];
+
+        foreach ($lines as $line) {
+            if (Block::isBlockHeader($line) && !empty($lineBuffer)) {
+                $block = Block::parse($lineBuffer);
+                if ($block !== null) {
+                    $this->addBlock($block);
+                }
+
+                $lineBuffer = [];
+            }
+
+            $lineBuffer[] = $line;
+        }
+
+        $lastBlock = Block::parse($lineBuffer);
+        if ($lastBlock !== null) {
+            $this->addBlock($lastBlock);
+        }
     }
 
     /**

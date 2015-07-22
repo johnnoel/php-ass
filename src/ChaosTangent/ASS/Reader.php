@@ -2,8 +2,10 @@
 
 namespace ChaosTangent\ASS;
 
+use ChaosTangent\ASS\Exception\InvalidScriptException;
+
 /**
- * Advanced Sub Station Alpha reader
+ * Advanced Sub Station Alpha file reader
  *
  * @author John Noel <john.noel@chaostangent.com>
  * @package php-ass
@@ -18,8 +20,8 @@ class Reader
             throw new \InvalidArgumentException('Unable to read file: '.$filename);
         }
 
-        $script = new Script(file_get_contents($filename));
-        if ($script->isASSScript()) {
+        $script = new Script(file_get_contents($filename), basename($filename));
+        if (!$script->isASSScript()) {
             throw new InvalidScriptException($script, 'Passed file does not look like a script');
         }
 

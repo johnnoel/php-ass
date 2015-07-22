@@ -2,6 +2,7 @@
 
 namespace ChaosTangent\ASS\Block;
 
+use ChaosTangent\ASS\Line\Line;
 use ChaosTangent\ASS\Exception\UnrecognizedScriptInfoLineException;
 
 /**
@@ -411,42 +412,19 @@ class ScriptInfo extends Block
      */
     protected function doParse(array $lines)
     {
-        foreach ($lines as $line) {
-            $parsed = $this->parseLine($line);
-            if ($parsed === null) {
+        foreach ($lines as $rawLine) {
+            $line = Line::parse($rawLine);
+
+            if ($line === null) {
                 continue;
             }
 
-            list($key, $value) = $parsed;
-
-            if (!array_key_exists($key, $this->lineMapping)) {
-                throw new UnrecognisedHeaderLineException($line);
+            if ($line->getKey() !== null && array_key_exists($line->getKey(), $this->lineMapping)) {
+                $var = $this->lineMapping[$line->getKey()];
+                $this->$var = $line->getValue();
             }
 
-            $var = $this->lineMapped[$key];
-            $this->$var = $value;
+            $this->lines[] = $line;
         }
-    }
-
-    /**
-     * Parse an individual line in the format "Key with spaces": "Value"
-     *
-     * @param string $line
-     * @return array|null An array with [0] as the line key and [1] as the
-     *                    value
-     */
-    protected function parseLine($line)
-    {
-        // comment, do nothing
-        if (substr($line, 0, 1) == ';') {
-            return null;
-        }
-
-        $matches = [];
-        if (preg_match('/^([^:]+):\s*(.*)$/', trim($line), $matches) !== 1) {
-            return null;
-        }
-
-        return [ $matches[1], $matches[2] ];
     }
 }
