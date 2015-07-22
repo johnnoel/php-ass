@@ -10,4 +10,10 @@ namespace ChaosTangent\ASS\Block;
  */
 class Styles extends Block
 {
+    /**
+     * {@inheritDoc}
+     */
+    protected function doParse(array $lines)
+    {
+    }
 }
