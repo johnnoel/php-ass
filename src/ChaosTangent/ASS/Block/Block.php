@@ -15,12 +15,12 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
     /** @var array */
     protected $lines = [];
     /** @var array */
-    protected static $mapping = [
+    protected static $classMap = [
         'Script Info' => ScriptInfo::class,
         'V4+ Styles' => Styles::class,
         'Events' => Events::class,
-        'Fonts' => null,
-        'Graphics' => null,
+        //'Fonts' => null,
+        //'Graphics' => null,
     ];
 
     /**
@@ -53,15 +53,52 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
         $id = $matches[1];
 
         // don't recognise the key or not yet implemented
-        if (!array_key_exists($id, self::$mapping) || self::$mapping[$id] === null) {
+        if (!array_key_exists($id, self::$classMap)) {
             return null;
         }
 
-        $block = new self::$mapping[$id];
+        $block = new self::$classMap[$id];
         $block->setId($id);
         $block->doParse(array_slice($lines, 1));
 
         return $block;
+    }
+
+    /**
+     * Add a line
+     *
+     * @param Line $line
+     * @return Block
+     */
+    public function addLine(Line $line)
+    {
+        $this->lines[] = $line;
+
+        return $this;
+    }
+
+    /**
+     * Remove a line
+     *
+     * @param Line $line
+     * @return Block
+     */
+    public function removeLine(Line $line)
+    {
+        $k = array_search($line, $this->lines, true);
+        if ($k !== false) {
+            unset($line[$k]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getLines()
+    {
+        return $this->lines;
     }
 
     /**

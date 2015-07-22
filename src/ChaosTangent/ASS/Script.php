@@ -119,6 +119,16 @@ class Script implements \IteratorAggregate
     }
 
     /**
+     * Get blocks
+     *
+     * @return array An array of blocks
+     */
+    public function getBlocks()
+    {
+        return $this->blocks;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getIterator()
