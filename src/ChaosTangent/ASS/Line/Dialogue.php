@@ -299,6 +299,19 @@ class Dialogue extends MappedLine
     }
 
     /**
+     * Gets text but without any style overrides in it
+     *
+     * E.g. "{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}My destiny" will
+     * become "My destiny"
+     *
+     * @return string
+     */
+    public function getTextWithoutStyleOverrides()
+    {
+        return preg_replace('/\{\\\[^\}]+\}/', '', $this->text);
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function getMapping()

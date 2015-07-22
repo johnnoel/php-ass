@@ -9,15 +9,16 @@
 require __DIR__.'/../vendor/autoload.php';
 
 use ChaosTangent\ASS\Reader;
+use ChaosTangent\ASS\Line\Dialogue;
 
 $reader = new Reader();
 $script = $reader->fromFile(__DIR__.'/[Mawaru] Shingeki no Bahamut Genesis - NCED (BD 720p) [1B955FE0].ass');
 
 foreach ($script as $block) {
-    echo '['.$block->getId().']'.PHP_EOL;
+    echo '['.$block->getId().'] ('.get_class($block).')'.PHP_EOL;
 
     foreach ($block as $line) {
-        echo $line->getKey().' ['.get_class($line).']: '.$line->getValue().PHP_EOL;
+        echo $line->getKey().' ('.get_class($line).'): '.$line->getValue().PHP_EOL;
     }
 
     echo PHP_EOL;
