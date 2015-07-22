@@ -2,6 +2,8 @@
 
 namespace ChaosTangent\ASS\Block;
 
+use ChaosTangent\ASS\Line\Line;
+
 /**
  * ASS script block base class
  *
@@ -87,7 +89,7 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
     {
         $k = array_search($line, $this->lines, true);
         if ($k !== false) {
-            unset($line[$k]);
+            unset($this->lines[$k]);
         }
 
         return $this;
@@ -141,6 +143,10 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
+        if (!($value instanceof Line)) {
+            throw new \InvalidArgumentException('You must only set Lines using array access');
+        }
+
         if ($offset === null) {
             $this->lines[] = $value;
         } else {
