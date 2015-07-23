@@ -130,12 +130,20 @@ class Script implements \IteratorAggregate
     /**
      * Whether a block exists within this script
      *
-     * @param Block $block
+     * You can pass either a full block object in which case this will search
+     * for a Block with the same ID (not object identity) or you can pass an
+     * ID e.g. hasBlock('Script Info').
+     *
+     * @param Block|string $block
      * @return boolean
      */
-    public function hasBlock(Block $block)
+    public function hasBlock($block)
     {
-        return array_key_exists($block->getId(), $this->blocks);
+        if ($block instanceof Block) {
+            return array_key_exists($block->getId(), $this->blocks);
+        }
+
+        return array_key_exists($block, $this->blocks);
     }
 
     /**
@@ -146,6 +154,17 @@ class Script implements \IteratorAggregate
     public function getBlocks()
     {
         return $this->blocks;
+    }
+
+    /**
+     * Get a single block
+     *
+     * @param string $blockId
+     * @return Block|null
+     */
+    public function getBlock($blockId)
+    {
+        return ($this->hasBlock($blockId)) ? $this->blocks[$blockId] : null;
     }
 
     /**

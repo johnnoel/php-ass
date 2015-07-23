@@ -116,7 +116,6 @@ class Line
         return $this->value;
     }
 
-
     /**
      * Do any subsequent, type specific parsing
      *

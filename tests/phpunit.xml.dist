@@ -17,6 +17,9 @@
         <testsuite name="Block">
             <directory suffix="Test.php">./ChaosTangent/ASS/Block/</directory>
         </testsuite>
+        <testsuite name="Line">
+            <directory suffix="Test.php">./ChaosTangent/ASS/Line/</directory>
+        </testsuite>
         <!--<testsuite name="Reader">
             <file>./ChaosTangent/ASS/ReaderTest.php</file>
         </testsuite>

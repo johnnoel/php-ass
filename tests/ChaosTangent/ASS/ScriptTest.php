@@ -78,9 +78,11 @@ class ScriptTest extends PHPUnit_Framework_TestCase
 
         $script->addBlock($block);
         $this->assertTrue($script->hasBlock($block));
+        $this->assertTrue($script->hasBlock(ScriptInfo::DEFAULT_ID));
 
         $blocks = $script->getBlocks();
         $this->assertContains($block, $blocks);
+        $this->assertEquals($block, $script->getBlock($block->getId()));
     }
 
     public function testRemoveBlock()
