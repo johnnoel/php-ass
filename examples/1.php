@@ -12,7 +12,7 @@ use ChaosTangent\ASS\Reader;
 use ChaosTangent\ASS\Line\Dialogue;
 
 $reader = new Reader();
-$script = $reader->fromFile(__DIR__.'/[Mawaru] Shingeki no Bahamut Genesis - NCED (BD 720p) [1B955FE0].ass');
+$script = $reader->fromFile(__DIR__.'/../tests/scripts/small.ass');
 
 foreach ($script as $block) {
     echo '['.$block->getId().'] ('.get_class($block).')'.PHP_EOL;

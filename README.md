@@ -97,6 +97,8 @@ At the moment php-ass supports the following blocks:
 * V4+ Styles as [`ChaosTangent\ASS\Block\Styles`](src/ChaosTangent/ASS/Block/Styles.php)
 * Events as [`ChaosTangent\ASS\Block\Events`](src/ChaosTangent/ASS/Block/Events.php)
 
+Any other kind of block (e.g. "Aegisub Project Garbage", "Fonts") are silently ignored when parsing.
+
 `ScriptInfo` blocks provide functions for common fields:
 
 ```php
@@ -157,6 +159,14 @@ foreach ($block as $line) {
 }
 ```
 
+## Tests
+
+There is a growing test suite for this library that you can use [phpunit](http://phpunit.de) to validate against. Any esoteric or known broken scripts would be a welcome addition.
+
 ## TODO
 
 * Allow reading of embedded information (images, fonts etc.)
+* Allow construction and writing of ASS files
+* More line type support
+* More block type support
+* Test completion
