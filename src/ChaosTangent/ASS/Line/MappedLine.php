@@ -32,6 +32,8 @@ abstract class MappedLine extends Line
      */
     public function applyMapping($value, array $mapping)
     {
+        $this->setValue($value);
+
         $classMapping = $this->getMapping();
         $parts = explode(',', $value, count($mapping));
 
@@ -50,8 +52,6 @@ abstract class MappedLine extends Line
                 // trigger exception?
             }
         }
-
-        $this->setValue($value);
     }
 
     /**
