@@ -69,9 +69,13 @@ class Script implements \IteratorAggregate
             return;
         }
 
+        if (!$this->isASSScript()) {
+            throw new InvalidScriptException($this, 'Content doesn\'t contain "[Script Info]" as the first line');
+        }
+
         $lines = explode("\n", $this->content); // SSA/ASS files are always DOS
         if (count($lines) == 1) {
-            throw new InvalidScriptException('Only one line in the script, probably incorrect line endings.');
+            throw new InvalidScriptException($this, 'Only one line in the script, probably incorrect line endings.');
         }
 
         $lineBuffer = [];

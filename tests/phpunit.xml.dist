@@ -11,6 +11,9 @@
          bootstrap="./bootstrap.php"
 >
     <testsuites>
+        <testsuite name="Script">
+            <file>./ChaosTangent/ASS/ScriptTest.php</file>
+        </testsuite>
         <testsuite name="Block">
             <directory suffix="Test.php">./ChaosTangent/ASS/Block/</directory>
         </testsuite>
