@@ -1,66 +1,54 @@
 # php-ass
 
-A set of classes for reading information from .ass (ASS, Advanced Substation Alpha) subtitle files.
+A library for reading and writing Advanced Substation Alpha subtitle files.
 
-## Concept
+## Specification
 
-For further details of the file format, see the [ASS file specs](http://matroska.org/technical/specs/subtitles/ssa.html).
+The ASS file specs are available in various parts in various places:
 
-ASS files are split into several blocks or sections in an INI style format. Within each block is a series of unsorted entries.
+1. [Wikipedia has a good overview](https://en.wikipedia.org/wiki/SubStation_Alpha#Advanced_SubStation_Alpha)
+2. [The original format in Microsoft Word .doc format](http://www.perlfu.co.uk/projects/asa/ass-specs.doc)
+3. [How the files are incorporated into Matroska (MKV) files](http://www.matroska.org/technical/specs/subtitles/ssa.html)
 
-The classes here allow you to read a valid Sub Station Alpha v4.00+ file and search and retrieve the data within it.
+In short: ASS files are an advanced version of the original SSA (Sub Station Alpha) subtitle files and include several improvements in terms of styling and effects.
 
-## Usage
+A valid script file starts with [Script Info] and contains several sections in INI style format.
 
-Use your autoloader for the files or ```require``` them as needed.
+## Quick start
 
-Call one of the static methods to read from a file:
+Install using composer:
 
-```php
-$assFile = chaostangent\Ass\Ass::fromFile($filename);
-```
+```composer require johnnoel/php-ass```
 
-Or from a string:
-
-```php
-$assFile = chaostangent\Ass\Ass::fromString($data);
-```
-
-Once you've read in the file, you can get all of the read blocks by calling ```$ass->getBlocks();``` or if you want to try and find a specific block by name ```$ass->findBlocks('string');```. Block names are string matched, case sensitive.
-
-For each block you can get the list of entries by doing ```$block->getEntries();```.
-
-Once you have a block you can do one of three things: extract, pluck or search.
-
-### Extract
-
-Extract gets you all of one type of data from an ASS file, the currently supported types are dialoge, styles, comments, and misc (everything else).
+Then start using:
 
 ```php
-$styleEntries = $block->getEntries()->extract(chaostangent\Ass\Entries::ENTRY_STYLE);
+require __DIR__.'/vendor/autoload.php';
+
+use ChaosTangent\ASS\Reader;
+
+$reader = new Reader();
+$script = $reader->fromFile(__DIR__.'/examples/example.ass');
+
+foreach ($script as $block) {
+    echo $block->getId().PHP_EOL;
+
+    foreach ($block as $line) {
+        echo $line->getKey().': '.$line->getValue();
+    }
+}
 ```
 
-### Pluck
+## Parts
 
-Plucking doesn't return an array of entry objects but an array of strings for a specified type. For instance, if you wanted to gather all of the 'Fontname' values from style entries:
+### Script
 
-```php
-$fontNames = $block->getEntries()->pluck(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname');
-```
+The ```ChaosTangent\ASS\Script``` class represents the root object of an ASS script.
 
-### Search
+### Block
 
-Does exactly what you expect, do a search for all entries with a specific type, key name and value:
-
-```php
-$things = $block->getEntries()->search(chaostangent\Ass\Entries::ENTRY_STYLE, 'Fontname', 'Arial');
-```
+### Line
 
 ## TODO
 
 * Allow reading of embedded information (images, fonts etc.)
-* More consistent interface
-
-## Goals
-
-* Allow reading of dialogue data (and only dialogue data) from ASS files
