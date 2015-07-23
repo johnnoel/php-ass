@@ -13,6 +13,8 @@ use ChaosTangent\ASS\Exception\UnrecognizedScriptInfoLineException;
  */
 class ScriptInfo extends Block
 {
+    const DEFAULT_ID = 'Script Info';
+
     /** @var string */
     protected $title;
     /** @var string */
@@ -61,6 +63,11 @@ class ScriptInfo extends Block
         'Timer' => 'timer',
         'WrapStyle' => 'wrapStyle',
     ];
+
+    public function __construct($id = self::DEFAULT_ID)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Set title

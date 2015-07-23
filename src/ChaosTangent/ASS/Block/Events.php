@@ -10,4 +10,10 @@ namespace ChaosTangent\ASS\Block;
  */
 class Events extends MappedBlock
 {
+    const DEFAULT_ID = 'Events';
+
+    public function __construct($id = self::DEFAULT_ID)
+    {
+        $this->id = $id;
+    }
 }
