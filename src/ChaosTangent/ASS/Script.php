@@ -51,10 +51,24 @@ class Script implements \IteratorAggregate
     }
 
     /**
+     * Whether this script has been parsed or not
+     *
+     * @return boolean
+     */
+    public function isParsed()
+    {
+        return $this->parsed;
+    }
+
+    /**
      * Parse this script
      */
     public function parse()
     {
+        if ($this->parsed) {
+            return;
+        }
+
         $lines = explode("\n", $this->content); // SSA/ASS files are always DOS
         if (count($lines) == 1) {
             throw new InvalidScriptException('Only one line in the script, probably incorrect line endings.');
@@ -79,6 +93,8 @@ class Script implements \IteratorAggregate
         if ($lastBlock !== null) {
             $this->addBlock($lastBlock);
         }
+
+        $this->parsed = true;
     }
 
     /**
