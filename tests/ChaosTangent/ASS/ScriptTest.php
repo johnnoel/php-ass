@@ -70,4 +70,41 @@ class ScriptTest extends PHPUnit_Framework_TestCase
         $script->parse();
         $this->assertTrue($script->isParsed());
     }
+
+    public function testAddBlock()
+    {
+        $script = new Script('');
+        $block = new ScriptInfo();
+
+        $script->addBlock($block);
+        $this->assertTrue($script->hasBlock($block));
+
+        $blocks = $script->getBlocks();
+        $this->assertContains($block, $blocks);
+    }
+
+    public function testRemoveBlock()
+    {
+        $script = new Script('');
+        $block = new ScriptInfo();
+
+        $script->addBlock($block);
+        $this->assertTrue($script->hasBlock($block));
+
+        $script->removeBlock($block);
+        $this->assertFalse($script->hasBlock($block));
+
+        $blocks = $script->getBlocks();
+        $this->assertNotContains($block, $blocks);
+    }
+
+    public function testIterator()
+    {
+        $script = new Script('');
+        $block = new ScriptInfo();
+
+        $script->addBlock($block);
+
+        $this->assertContains($block, $script);
+    }
 }
