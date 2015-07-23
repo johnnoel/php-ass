@@ -25,14 +25,21 @@ abstract class MappedLine extends Line
     abstract protected function getMapping();
 
     /**
-     * {@inheritDoc}
+     * With a string value and an array mapping, map values to this class
+     *
+     * @param string $value
+     * @param array $mapping
      */
-    protected function doParse($value, array $mapping)
+    public function applyMapping($value, array $mapping)
     {
         $classMapping = $this->getMapping();
         $parts = explode(',', $value, count($mapping));
 
         foreach ($parts as $offset => $part) {
+            if (!array_key_exists($offset, $mapping)) {
+                continue;
+            }
+
             $assName = $mapping[$offset];
             $value = $part;
 
@@ -43,5 +50,20 @@ abstract class MappedLine extends Line
                 // trigger exception?
             }
         }
+
+        $this->setValue($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function doParse($value, array $mapping)
+    {
+        // if we don't have a mapping, not much else we can do
+        if (empty($mapping)) {
+            return;
+        }
+
+        $this->applyMapping($value, $mapping);
     }
 }
