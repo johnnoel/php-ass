@@ -26,6 +26,18 @@ class ScriptTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testParseUTF8()
+    {
+        $scriptPath = __DIR__.'/../../scripts/utf8.ass';
+        $content = file_get_contents($scriptPath);
+        $script = new Script($content, basename($scriptPath));
+        $script->parse();
+
+        $this->assertTrue($script->hasBlock('Events'));
+        $this->assertCount(3, $script->getBlocks());
+        $this->assertCount(371, $script->getBlock('Events')->getLines());
+    }
+
     /**
      * @expectedException ChaosTangent\ASS\Exception\InvalidScriptException
      */

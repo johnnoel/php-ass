@@ -21,6 +21,8 @@ class Script implements \IteratorAggregate
     protected $blocks = [];
     /** @var boolean */
     protected $parsed = false;
+    /** @var boolean */
+    protected $isUTF8 = false;
 
     /**
      * @param string $content The plain text content of the ASS script
@@ -46,6 +48,12 @@ class Script implements \IteratorAggregate
      */
     public function isASSScript()
     {
+        // check for UTF8 BOM
+        if (substr($this->content, 0, 3) == (chr(0xEF).chr(0xBB).chr(0xBF))) {
+            $this->isUTF8 = true;
+            $this->content = substr($this->content, 3);
+        }
+
         $string = '[Script Info]';
         return substr($this->content, 0, strlen($string)) == $string;
     }

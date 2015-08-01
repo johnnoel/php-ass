@@ -3,6 +3,7 @@
 namespace ChaosTangent\ASS\Block;
 
 use ChaosTangent\ASS\Line\Line;
+use ChaosTangent\ASS\Exception\InvalidBlockException;
 
 /**
  * ASS script block base class
@@ -33,7 +34,7 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
      */
     public static function isBlockHeader($line)
     {
-        return preg_match('/^\[[^\]]+\]$/', $line) === 1;
+        return preg_match('/^\[[^\]]+\]\s*$/', $line) === 1;
     }
 
     /**
@@ -48,8 +49,8 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
         $rawId = $lines[0];
         $matches = [];
 
-        if (preg_match('/^\[([^\]]+)\]$/', $rawId, $matches) !== 1) {
-            throw new InvalidBlockException($this, 'Cannot read ID for block');
+        if (preg_match('/^\[([^\]]+)\]\s*$/', $rawId, $matches) !== 1) {
+            throw new InvalidBlockException(null, 'Cannot read ID for block, first line: '.$rawId);
         }
 
         $id = $matches[1];
