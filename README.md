@@ -19,7 +19,7 @@ A valid script file starts with [Script Info] and contains several sections in I
 Install using composer:
 
 ```shell
-composer require johnnoel/php-ass
+composer require chaostangent/php-ass
 ```
 
 Then start using:
