@@ -324,12 +324,28 @@ class Dialogue extends MappedLine
      * E.g. "{Rub a dub dub~ }Thanks for the grub!{Why is she eating all the
      * fried rice first?!}" is only shown as "Thanks for the grub!"
      *
+     * This will also remove drawing commands which is set via "mode" switch
+     *
+     * E.g "{\an5\p1\c&HFDFDFD&\blur0.5\pos(512.674,156.653)}m 0 0 l 84 15 l
+     * 141 -1 l 166 -37 l 167 -126 l -37 -122 l -38 -62 {\p0}"
+     *
      * @see ChaosTangent\ASS\Line\Dialogue::getTextWithoutStyleOverrides()
      * @return string
      */
     public function getVisibleText()
     {
-        return preg_replace('/\{[^\}]+\}/', '', $this->text);
+        $matches = [];
+        $text = $this->text;
+
+        // does this line contain a drawing command style override? If so:
+        if (preg_match('/\{[^\}]*\\\p(\d+)(\\\[^\}]+\}|\})/', $text, $matches) === 1) {
+            // replace all of the drawing command
+            // a drawing command either ends at the end of the line or at {\p0}
+            $text = preg_replace('/\{[^\}]*\\\p\d+(\\\[^\}]+\}|\}).*?($|\{\\\p0\})/', '', $text);
+        }
+
+        // then replace any remaining command code or comments
+        return preg_replace('/\{[^\}]+\}/', '', $text);
     }
 
     /**
