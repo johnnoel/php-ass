@@ -3,6 +3,7 @@
 namespace ChaosTangent\ASS\Block;
 
 use ChaosTangent\ASS\Line\Line;
+use ChaosTangent\ASS\Exception\InvalidBlockException;
 
 /**
  * Mapped block
@@ -30,6 +31,10 @@ abstract class MappedBlock extends Block
                 $this->lines[] = $format;
                 break;
             }
+        }
+
+        if ($format === null) {
+            throw new InvalidBlockException($this, 'No valid format line found in block');
         }
 
         foreach ($lines as $rawLine) {
