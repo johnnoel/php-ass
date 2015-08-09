@@ -71,6 +71,42 @@ class Line
     }
 
     /**
+     * Converts a timecode into seconds
+     *
+     * E.g. 0:07:02.44 is 0 hours, 7 minutes, 2.44 seconds which is 422.44
+     * seconds
+     *
+     * @param string The timecode to parse
+     * @return float
+     */
+    public static function parseTimecodeIntoSeconds($timecode)
+    {
+        $parts = explode(':', $timecode);
+        $ret = 0;
+
+        if (count($parts) == 3) {
+            $hours = intval(reset($parts));
+            $ret += ($hours * 60 * 60);
+
+            array_shift($parts);
+        }
+
+        if (count($parts) == 2) {
+            $minutes = intval(reset($parts));
+            $ret += ($minutes * 60);
+
+            array_shift($parts);
+        }
+
+        if (count($parts) == 1) {
+            $seconds = floatval(reset($parts));
+            $ret += $seconds;
+        }
+
+        return $ret;
+    }
+
+    /**
      * Set key
      *
      * @param string $key

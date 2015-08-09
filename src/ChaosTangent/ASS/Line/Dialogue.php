@@ -28,8 +28,12 @@ class Dialogue extends MappedLine
     protected $layer;
     /** @var string */
     protected $start;
+    /** @var float */
+    protected $startAsSeconds;
     /** @var string */
     protected $end;
+    /** @var float */
+    protected $endAsSeconds;
     /** @var string */
     protected $style;
     /** @var string */
@@ -100,6 +104,7 @@ class Dialogue extends MappedLine
     public function setStart($start)
     {
         $this->start = $start;
+        $this->startAsSeconds = null;
 
         return $this;
     }
@@ -115,6 +120,20 @@ class Dialogue extends MappedLine
     }
 
     /**
+     * Get the start value as seconds from 0
+     *
+     * @return float
+     */
+    public function getStartAsSeconds()
+    {
+        if ($this->startAsSeconds === null) {
+            $this->startAsSeconds = self::parseTimecodeIntoSeconds($this->start);
+        }
+
+        return $this->startAsSeconds;
+    }
+
+    /**
      * Set end
      *
      * @param string $end
@@ -123,6 +142,7 @@ class Dialogue extends MappedLine
     public function setEnd($end)
     {
         $this->end = $end;
+        $this->endAsSeconds = null;
 
         return $this;
     }
@@ -135,6 +155,20 @@ class Dialogue extends MappedLine
     public function getEnd()
     {
         return $this->end;
+    }
+
+    /**
+     * Get the end value as seconds from 0
+     *
+     * @return float
+     */
+    public function getEndAsSeconds()
+    {
+        if ($this->endAsSeconds === null) {
+            $this->endAsSeconds = self::parseTimecodeIntoSeconds($this->end);
+        }
+
+        return $this->endAsSeconds;
     }
 
     /**

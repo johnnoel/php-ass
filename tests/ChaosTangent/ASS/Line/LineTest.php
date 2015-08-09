@@ -108,4 +108,13 @@ class LineTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Dialogue::class, $dialogue4);
         $this->assertEquals('Visible text', $dialogue4->getVisibleText());
     }
+
+    public function testTimecodeParsing()
+    {
+        $this->assertEquals(3723.45, Line::parseTimecodeIntoSeconds('01:02:03.45'));
+        $this->assertEquals(62.34, Line::parseTimecodeIntoSeconds('01:02.34'));
+        $this->assertEquals(1.23, Line::parseTimecodeIntoSeconds('01.23'));
+        $this->assertEquals(0, Line::parseTimecodeIntoSeconds('invalid'));
+        $this->assertEquals(0, Line::parseTimecodeIntoSeconds('a:b:c'));
+    }
 }
