@@ -312,6 +312,27 @@ class Dialogue extends MappedLine
     }
 
     /**
+     * Gets only "visible" text
+     *
+     * Unlike "getTextWithoutStyle" overrides this will remove ANY text
+     * within curly braces. This is because most subtitle renderers do that and
+     * script authors tend to leave comments in curly braces. This deviates
+     * from what the original spec says in that all style override codes begin
+     * with a backslash \ meaning anything within braces without a preceding
+     * slash isn't an override
+     *
+     * E.g. "{Rub a dub dub~ }Thanks for the grub!{Why is she eating all the
+     * fried rice first?!}" is only shown as "Thanks for the grub!"
+     *
+     * @see ChaosTangent\ASS\Line\Dialogue::getTextWithoutStyleOverrides()
+     * @return string
+     */
+    public function getVisibleText()
+    {
+        return preg_replace('/\{[^\}]+\}/', '', $this->text);
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function getMapping()

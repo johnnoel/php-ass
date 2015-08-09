@@ -55,11 +55,27 @@ class LineTest extends PHPUnit_Framework_TestCase
         $formatLine = Line::parse($format);
         $mapping = $formatLine->getMapping();
 
-        $validFull = 'Dialogue: 0,0:00:00.00,0:00:00.00,Style name,,0,0,0,,';
+        $validFull = 'Dialogue: 6,0:00:00.00,0:00:00.00,Style name,,0,0,0,,';
 
         $dialogue = Line::parse($validFull, $mapping);
 
         $this->assertInstanceOf(Dialogue::class, $dialogue);
-        $this->assertEquals(0, $dialogue->getLayer());
+        $this->assertEquals(6, $dialogue->getLayer());
+    }
+
+    public function testTextViews()
+    {
+        $format = 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text';
+        $formatLine = Line::parse($format);
+        $mapping = $formatLine->getMapping();
+
+        $withCodesAndComments = 'Dialogue: 10,0:08:45.51,0:08:48.01,GJ-01,Mao,0,0,0,,{Rub a dub dub~ }{\move(563,35,563,25,0,100)}Thanks for the grub!{Why is she eating all the fried rice first?!}';
+
+        $dialogue = Line::parse($withCodesAndComments, $mapping);
+
+        $this->assertInstanceOf(Dialogue::class, $dialogue);
+        $this->assertEquals('{Rub a dub dub~ }{\move(563,35,563,25,0,100)}Thanks for the grub!{Why is she eating all the fried rice first?!}', $dialogue->getText());
+        $this->assertEquals('{Rub a dub dub~ }Thanks for the grub!{Why is she eating all the fried rice first?!}', $dialogue->getTextWithoutStyleOverrides());
+        $this->assertEquals('Thanks for the grub!', $dialogue->getVisibleText());
     }
 }
