@@ -50,7 +50,7 @@ class Line
 
         $matches = [];
         if (preg_match('/^([^:]+):\s*(.*)$/', trim($content), $matches) !== 1) {
-            // doesn't match this format, do nother
+            // doesn't match this format, do nothing
             return null;
         }
 

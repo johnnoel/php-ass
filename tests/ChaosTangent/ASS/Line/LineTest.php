@@ -109,6 +109,31 @@ class LineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Visible text', $dialogue4->getVisibleText());
     }
 
+    public function testNewlineConversion()
+    {
+        $format = 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text';
+        $formatLine = Line::parse($format);
+        $mapping = $formatLine->getMapping();
+
+        // from [Commie] Aiura - 04 [D6B36532].mkv
+        $noNewLine = 'Dialogue: 0,0:03:32.31,0:03:45.20,signs,shirt,0,0,0,,{\pos(791,469)\fnwhatever it takes\blur0.6\fs30\frz342.3\frx24\fry356\c&H7080AB&\b1}Rice or Bread?';
+        $ucNewLine = 'Dialogue: 0,0:03:32.31,0:03:45.20,signs,shirt,0,0,0,,{\pos(791,469)\fnwhatever it takes\blur0.6\fs30\frz342.3\frx24\fry356\c&H7080AB&\b1}Rice or\N Bread?';
+        $lcNewLine = 'Dialogue: 0,0:03:32.31,0:03:45.20,signs,shirt,0,0,0,,{\pos(791,469)\fnwhatever it takes\blur0.6\fs30\frz342.3\frx24\fry356\c&H7080AB&\b1}Rice or\n Bread?';
+        $comboNewLine = 'Dialogue: 0,0:03:32.31,0:03:45.20,signs,shirt,0,0,0,,{\pos(791,469)\fnwhatever it takes\blur0.6\fs30\frz342.3\frx24\fry356\c&H7080AB&\b1}Rice or\n\N Bread?';
+
+        $dialogue1 = Line::parse($noNewLine, $mapping);
+        $this->assertEquals(0, substr_count($dialogue1->getVisibleText(), "\n"));
+
+        $dialogue2 = Line::parse($ucNewLine, $mapping);
+        $this->assertEquals(1, substr_count($dialogue2->getVisibleText(), "\n"));
+
+        $dialogue3 = Line::parse($lcNewLine, $mapping);
+        $this->assertEquals(1, substr_count($dialogue3->getVisibleText(), "\n"));
+
+        $dialogue4 = Line::parse($comboNewLine, $mapping);
+        $this->assertEquals(2, substr_count($dialogue4->getVisibleText(), "\n"));
+    }
+
     public function testTimecodeParsing()
     {
         $this->assertEquals(3723.45, Line::parseTimecodeIntoSeconds('01:02:03.45'));

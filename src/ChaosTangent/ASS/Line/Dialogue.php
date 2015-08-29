@@ -363,6 +363,10 @@ class Dialogue extends MappedLine
      * E.g "{\an5\p1\c&HFDFDFD&\blur0.5\pos(512.674,156.653)}m 0 0 l 84 15 l
      * 141 -1 l 166 -37 l 167 -126 l -37 -122 l -38 -62 {\p0}"
      *
+     * This will also transform any \n and \N values into linebreaks, it is up
+     * to the renderer (if any) how to display these breaks depending on the
+     * ScriptInfo block's WrapStyle parameter
+     *
      * @see ChaosTangent\ASS\Line\Dialogue::getTextWithoutStyleOverrides()
      * @return string
      */
@@ -377,6 +381,9 @@ class Dialogue extends MappedLine
             // a drawing command either ends at the end of the line or at {\p0}
             $text = preg_replace('/\{[^\}]*\\\p\d+(\\\[^\}]+\}|\}).*?($|\{\\\p0\})/', '', $text);
         }
+
+        // replace new line indicators
+        $text = preg_replace('/\\\n|\\\N/', "\n", $text);
 
         // then replace any remaining command code or comments
         return preg_replace('/\{[^\}]+\}/', '', $text);
