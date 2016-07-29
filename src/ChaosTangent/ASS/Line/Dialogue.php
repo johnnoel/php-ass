@@ -172,26 +172,26 @@ class Dialogue extends MappedLine
     }
 
     /**
-     * Set stye
+     * Set style
      *
-     * @param string $stye
+     * @param string $style
      * @return Dialogue
      */
-    public function setStyle($stye)
+    public function setStyle($style)
     {
-        $this->stye = $stye;
+        $this->style = $style;
 
         return $this;
     }
 
     /**
-     * Get stye
+     * Get style
      *
      * @return string
      */
     public function getStyle()
     {
-        return $this->stye;
+        return $this->style;
     }
 
     /**
