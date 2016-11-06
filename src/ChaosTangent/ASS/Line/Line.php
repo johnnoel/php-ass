@@ -160,4 +160,8 @@ class Line
     protected function doParse($value, array $mapping)
     {
     }
+
+    public function toString($mapping = []) {
+        return $this->key.': '.$this->value;
+    }
 }

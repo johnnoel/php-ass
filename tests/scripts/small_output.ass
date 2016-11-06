@@ -1,0 +1,36 @@
+[Script Info]
+Title: Default Aegisub file
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.601
+PlayResX: 1280
+PlayResY: 720
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ED_Romaji,Minion Pro Cond,48,&H00000000,&H000000FF,&H00FFFFFF,&H00000000,-1,0,0,0,100,100,0,0,1,2,0,7,40,40,32,1
+Style: ED_English,Minion Pro Cond,48,&H00000000,&H000000FF,&H00FFFFFF,&H00000000,-1,0,0,0,100,100,0,0,1,2,0,1,42,42,28,1
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.98,0:00:05.43,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}My destiny,
+Dialogue: 0,0:00:05.42,0:00:10.56,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}sotto oshiete hoshii
+Dialogue: 0,0:00:05.43,0:00:10.57,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}won't you tell me?
+Dialogue: 0,0:00:12.74,0:00:16.00,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}aenai
+Dialogue: 0,0:00:12.75,0:00:16.01,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}But you're gone
+Dialogue: 0,0:00:17.05,0:00:21.43,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}ima wa tooi place to be
+Dialogue: 0,0:00:17.06,0:00:21.44,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}in a place so far away
+Dialogue: 0,0:00:24.51,0:00:29.40,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}hitoribocchi todokanai
+Dialogue: 0,0:00:24.52,0:00:29.41,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}Alone and never-reaching
+Dialogue: 0,0:00:29.97,0:00:35.55,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}oshietekureta the truth is free
+Dialogue: 0,0:00:29.98,0:00:35.56,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}Yet you told me the truth is free
+Dialogue: 0,0:00:35.56,0:00:38.44,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}I miss you
+Dialogue: 0,0:00:38.44,0:00:41.05,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&}I revere you
+Dialogue: 0,0:00:41.05,0:00:48.04,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H000010&\3c&H80A0C0&\t(0,1500,\c&H281E1D&\3c&HF9CFC2&)}You're my everything
+Dialogue: 0,0:00:48.91,0:00:54.27,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}I will follow you
+Dialogue: 0,0:00:54.26,0:01:00.22,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}subete wa ano toki
+Dialogue: 0,0:00:54.27,0:01:00.23,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}For everything since then
+Dialogue: 0,0:01:00.23,0:01:05.89,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}You're my destiny
+Dialogue: 0,0:01:05.88,0:01:10.07,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}tsuretette
+Dialogue: 0,0:01:05.89,0:01:10.08,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}So take me
+Dialogue: 0,0:01:10.07,0:01:16.82,ED_Romaji,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}yakusoku no basho e
+Dialogue: 0,0:01:10.08,0:01:16.83,ED_English,,0,0,0,,{\fad(100,200)\blur5\c&H281E1D&\3c&HF9CFC2&}to our promised land

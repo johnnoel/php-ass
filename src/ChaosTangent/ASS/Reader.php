@@ -31,5 +31,12 @@ class Reader
 
     public function fromString($string)
     {
+        $script = new Script($string);
+        if (!$script->isASSScript()) {
+            throw new InvalidScriptException($script, 'Passed string does not look like a script');
+        }
+
+        $script->parse();
+        return $script;
     }
 }
