@@ -97,7 +97,7 @@ abstract class Block implements \IteratorAggregate, \ArrayAccess
     }
 
     /**
-     * @return array
+     * @return Line[]
      */
     public function getLines()
     {

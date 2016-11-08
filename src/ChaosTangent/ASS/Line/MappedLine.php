@@ -55,6 +55,25 @@ abstract class MappedLine extends Line
     }
 
     /**
+     * With a string value and an array mapping, map values to this class
+     *
+     * @param string $value
+     * @param array $mapping
+     */
+    public function reverseMapping($mapping)
+    {
+        $classMapping = $this->getMapping();
+
+        $string = '';
+        foreach ($mapping as $attribute) {
+            $id = $classMapping[$attribute];
+            $string .= $this->{$id}.',';
+        }
+
+        return trim($string, ',');
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function doParse($value, array $mapping)
@@ -65,5 +84,13 @@ abstract class MappedLine extends Line
         }
 
         $this->applyMapping($value, $mapping);
+    }
+
+    public function toString($mapping = []) {
+        if (count($mapping)) {
+            return $this->getKey() . ': ' . $this->reverseMapping($mapping);
+        } else {
+            return parent::toString();
+        }
     }
 }

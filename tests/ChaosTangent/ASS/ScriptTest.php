@@ -1,8 +1,10 @@
 <?php
 
+use ChaosTangent\ASS\Reader;
 use ChaosTangent\ASS\Script;
 use ChaosTangent\ASS\Exception\InvalidScriptException;
 use ChaosTangent\ASS\Block\ScriptInfo;
+use ChaosTangent\ASS\Writer;
 
 /**
  * Script test
@@ -120,5 +122,35 @@ class ScriptTest extends PHPUnit_Framework_TestCase
         $script->addBlock($block);
 
         $this->assertContains($block, $script);
+    }
+
+    /**
+     * @dataProvider scriptFiles
+     */
+    public function testReadWrite($file, $expectedResultFile)
+    {
+        $outputPath = __DIR__.'/../../scripts/'.$expectedResultFile;
+        $expectedContent = file_get_contents($outputPath);
+
+        $reader = new Reader();
+        $script = $reader->fromFile(__DIR__.'/../../scripts/'.$file);
+
+        $writer = new Writer();
+        $newcontent = $writer->toString($script);
+
+        /*
+         * Expected output is not exactly the same as input, since we remove
+         * irrelevant information from the file (e.g. extra line feeds, comments and
+         * code that might've been added by editors).
+         */
+        $this->assertEquals($expectedContent, $newcontent);
+    }
+
+    public function scriptFiles() {
+        return [
+            [ 'utf8.ass', 'utf8_output.ass' ],
+            [ 'small.ass', 'small_output.ass' ],
+            [ 'minimal.ass', 'minimal_output.ass' ]
+        ];
     }
 }
