@@ -4,7 +4,7 @@
     "description": "A library for reading Advanced Sub Station Alpha subtitle files",
     "keywords": ["ass","ssa","subtitles","subtitle","mkv","mp4"],
     "homepage": "http://github.com/johnnoel/php-ass",
-    "license": "Creative Commons Attribution-ShareAlike 3.0",
+    "license": "MIT",
     "authors": [{
         "name": "John Noel",
         "email": "john.noel@chaostangent.com"
